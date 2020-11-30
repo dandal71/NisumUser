@@ -62,7 +62,7 @@ public class UserController {
 	@PostMapping("/create")
 	public ResponseEntity<?> create(@Valid @RequestBody User user) { 
 		User userBD = this.userService.save(user);		
-		return ApiResponseBuilder.build(new ApiResponse(HttpStatus.OK, "Usuario creado con éxito", userBD));
+		return ApiResponseBuilder.build(new ApiResponse(HttpStatus.CREATED, "Usuario creado con éxito", userBD));
 		
 	}
 	
@@ -75,7 +75,7 @@ public class UserController {
 	@PutMapping("/private/update")
 	public ResponseEntity<?> save(@Valid @RequestBody User user) { 
 		User userBD = this.userService.save(user);		
-		return ApiResponseBuilder.build(new ApiResponse(HttpStatus.OK, "Usuario actualizado con éxito", userBD));
+		return ApiResponseBuilder.build(new ApiResponse(HttpStatus.CREATED, "Usuario actualizado con éxito", userBD));
 		
 	}
 	
