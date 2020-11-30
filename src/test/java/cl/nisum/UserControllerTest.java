@@ -19,6 +19,12 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import cl.nisum.model.entity.User;
 import cl.nisum.model.service.UserService;
 
+/**
+ * Test usuario controller
+ * 
+ * @author Daniel E. Dalmagro
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest {
