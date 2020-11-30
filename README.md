@@ -13,10 +13,11 @@ Debes tener Java jdk 1.8 + en tu entorno máquina local
 
 
 
-### Detalle de Endpoinst 🔧
+### Endpoint /create 🔧
 
 Path: /create - Método: POST
 Descripción: Creación de usuario: Permite crear un usuario
+Login: No requiere
 Body:
 ```json
 {        
@@ -76,83 +77,118 @@ Respuesta:
 ```
 
 
+### Endpoint /login 🔧
+Path: /login - Method: Post - Body: x-www-form-urlencoded 
+Campos form: 
+username: nombre de usuario para el login
+passowrd: contraseña ingreso 
+
+Respuesta éxito:
+```json
+{
+    "timestampResponse": "29-11-2020 11:36:29",
+    "status": "OK",
+    "message": "Login Exitoso",
+    "user": {
+        "id": "65c68db2-e66b-4837-896c-2eeb4c934cd2",
+        "name": "Daniel D. Dalmagro",
+        "username": "ddalmagro",
+        "password": "$2a$10$YJnP26zNr..9n7W5h/aq1.sp.89Op.y4XAdkDeXTFFjUDnszCdSoO",
+        "email": "dandal71@gmail.cl",
+        "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJuaXN1bUpXVCIsInN1YiI6ImRkYWxtYWdybyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2MDY3MDM3ODksImV4cCI6MTYwNjcwNDM4OX0.RZnEi8t6sRWnOb1a6ofK1vUohQzzKSPB1MgZSsho_jWmsq4kPW_QDfdUlbfJIdwx-UgRexuvBUP-NYtxpmaegg",
+        "status": 1,
+        "created": "2020-11-29T23:25:27.194914",
+        "modified": "2020-11-29T23:36:29.2555956",
+        "lastLogin": "2020-11-29T23:36:29.148568",
+        "phones": []
+    },
+    "users": null,
+    "errors": null
+}
+
 ```
-Da un ejemplo
+
+### Endpoint /list 🔧
+Path: api/v1/user/private/list - Método: GET
+Requiere login previo - Enviar token.
+```json
+Respuesta
+{
+    "timestampResponse": "29-11-2020 11:39:42",
+    "status": "OK",
+    "message": "Entidades obtenidas éxitosamente",
+    "user": null,
+    "users": [
+        {
+            "id": "65c68db2-e66b-4837-896c-2eeb4c934cd2",
+            "name": "Daniel D. Dalmagro",
+            "username": "ddalmagro",
+            "password": "$2a$10$YJnP26zNr..9n7W5h/aq1.sp.89Op.y4XAdkDeXTFFjUDnszCdSoO",
+            "email": "dandal71@gmail.cl",
+            "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJuaXN1bUpXVCIsInN1YiI6ImRkYWxtYWdybyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2MDY3MDM3ODksImV4cCI6MTYwNjcwNDM4OX0.RZnEi8t6sRWnOb1a6ofK1vUohQzzKSPB1MgZSsho_jWmsq4kPW_QDfdUlbfJIdwx-UgRexuvBUP-NYtxpmaegg",
+            "status": 1,
+            "created": "2020-11-29T23:25:27.194914",
+            "modified": "2020-11-29T23:36:29.255596",
+            "lastLogin": "2020-11-29T23:36:29.148568",
+            "phones": []
+        }
+    ],
+    "errors": null
+}
 ```
 
-_Y repite_
 
+### Endpoint /get 🔧
+Path: api/v1/user/private/get/{id} - Método: GET
+Requiere login previo - Enviar token.
+
+```json
+Respuesta
+{
+    "timestampResponse": "29-11-2020 11:39:42",
+    "status": "OK",
+    "message": "Entidades obtenidas éxitosamente",
+    "user": null,
+    "users": [
+        {
+            "id": "65c68db2-e66b-4837-896c-2eeb4c934cd2",
+            "name": "Daniel D. Dalmagro",
+            "username": "ddalmagro",
+            "password": "$2a$10$YJnP26zNr..9n7W5h/aq1.sp.89Op.y4XAdkDeXTFFjUDnszCdSoO",
+            "email": "dandal71@gmail.cl",
+            "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJuaXN1bUpXVCIsInN1YiI6ImRkYWxtYWdybyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2MDY3MDM3ODksImV4cCI6MTYwNjcwNDM4OX0.RZnEi8t6sRWnOb1a6ofK1vUohQzzKSPB1MgZSsho_jWmsq4kPW_QDfdUlbfJIdwx-UgRexuvBUP-NYtxpmaegg",
+            "status": 1,
+            "created": "2020-11-29T23:25:27.194914",
+            "modified": "2020-11-29T23:36:29.255596",
+            "lastLogin": "2020-11-29T23:36:29.148568",
+            "phones": []
+        }
+    ],
+    "errors": null
+}
 ```
-hasta finalizar
-```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
-## Ejecutando las pruebas ⚙️
-
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-## Despliegue 📦
-
-_Agrega notas adicionales sobre como hacer deploy_
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+El proyecto fue creado con Spring Tool versión 4.0.1
+Se utilizaron los siguientes framework y herramientas
+* [Spring Boot] 
+* [Spring Data JPA]
+* [Spring Security]
+* [Spring Web]
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
-
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
+* [Gradle] Manejador de dependencias
 
 ## Autores ✒️
 
 _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
+* **Daniel E. Dalmagro** - *Trabajo Inicial* - [villanuevand](https://github.com/dandal71)
 
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* etc.
-
-
-
 ---
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
+⌨️ con ❤️ por [Daniel E. Dalmagro(https://github.com/dandal71) 😊
