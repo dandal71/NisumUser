@@ -18,6 +18,7 @@ Debes tener Java jdk 1.8 + en tu entorno máquina local
 Path: /create - Método: POST
 Descripción: Creación de usuario: Permite crear un usuario
 Body:
+```json
 {        
     "name": "Daniel D. Perez",
     "username": "ddperez",
@@ -72,7 +73,7 @@ Respuesta:
     "errors": null
 }
 
-
+```
 
 
 ```
