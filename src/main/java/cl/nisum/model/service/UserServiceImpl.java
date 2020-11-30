@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,10 +28,13 @@ import cl.nisum.utils.Const;
 public class UserServiceImpl implements UserService {
 
 	private final String passCheck = "(?=.*[0-9][0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,}";
+	private final String emailCheck = "^(.+)@(.+cl)$";
 
 	@Autowired
 	private UserRepository userRespository;
 		
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -49,7 +51,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public User save(User user) {		
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		//PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
 		if (user.getPassword() != null) {
 			if (!user.getPassword().matches(passCheck)) {
@@ -61,6 +63,10 @@ public class UserServiceImpl implements UserService {
 
 		if (this.isDuplicatedEmail(user.getEmail(), user.getId())) {
 			throw new UserException("Un usuario ya ha utilizado esta cuenta de correo", HttpStatus.BAD_REQUEST);
+		} else {
+			if (!user.getEmail().matches(emailCheck)){
+				throw new UserException("Formato de email inválido. Ingrese un mail de la forma: aaaaaa@algo.cl", HttpStatus.BAD_REQUEST);
+			}
 		}
 		
 		//new user

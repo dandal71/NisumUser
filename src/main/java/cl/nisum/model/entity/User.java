@@ -41,7 +41,7 @@ public class User {
 	
 	private String password;
 	
-	@NotBlank(message = "El email es un dato requerido")
+	@NotBlank(message = "El email es un dato requerido")	
 	private String email;
 	
 	private String token;
