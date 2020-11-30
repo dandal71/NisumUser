@@ -183,8 +183,6 @@ Se utilizaron los siguientes framework y herramientas
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
 * **Daniel E. Dalmagro** - *Trabajo Inicial* - [villanuevand](https://github.com/dandal71)
 
 ## Licencia 📄
