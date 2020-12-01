@@ -26,6 +26,5 @@ public interface UserService {
 	
 	public Iterable<User> getActiveUsers();
 	
-	public boolean isDuplicatedEmail(String email, UUID id);	
 
 }

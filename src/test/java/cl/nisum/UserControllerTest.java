@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.util.Arrays;
 import java.util.UUID;
@@ -64,7 +65,7 @@ public class UserControllerTest {
           .andExpect(header().string(HttpHeaders.LOCATION, "/api/v1/user/private/list"))
           .andExpect((ResultMatcher) jsonPath("$", hasSize(2)))
           .andExpect(jsonPath("$[0].id",  is(notNullValue())))
-          .andExpect(jsonPath("$[0].name", is("Widget Name")))
+          .andExpect(jsonPath("$[0].name", is("Nombre Test1")))
           .andExpect(jsonPath("$[0].username", is("utest11")))
           .andExpect(jsonPath("$[0].email", is("usertes1@nisum.cl")));
     }
@@ -84,11 +85,13 @@ public class UserControllerTest {
     	RequestBuilder request = MockMvcRequestBuilders.post("/api/v1/user/create")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(toJson(user1));
-    
+        	
+    	
     	mockMvc.perform(request)
-          .andExpect(status().isCreated())
-          .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-          .andExpect(jsonPath("user.id",  is(notNullValue())));
+	 		.andDo(print())
+	 		.andExpect(status().isCreated())
+	 		.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+	 		.andExpect(jsonPath("user.id",  is(notNullValue())));
     }
     
     @Test

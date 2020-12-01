@@ -60,7 +60,11 @@ public class UserServiceImpl implements UserService {
 				user.setPassword(passwordEncoder.encode(user.getPassword()));
 			}
 		}
-
+				
+		if (this.isDuplicatedUsername(user.getUsername(), user.getId())) {
+			throw new UserException("El nombre de usuario indicado ya está en uso", HttpStatus.BAD_REQUEST);
+		} 
+		
 		if (this.isDuplicatedEmail(user.getEmail(), user.getId())) {
 			throw new UserException("Un usuario ya ha utilizado esta cuenta de correo", HttpStatus.BAD_REQUEST);
 		} else {
@@ -110,8 +114,37 @@ public class UserServiceImpl implements UserService {
 		return this.userRespository.findByStatusGreaterThan(Const.USER_STATUS_ACTIVE);
 	}
 
-	@Override
-	public boolean isDuplicatedEmail(String email, UUID id) {
+	/**
+	 * Check duplicated email
+	 * 
+	 * @param email Email to check
+	 * @param id User id
+	 * @return true o false
+	 */
+	private boolean isDuplicatedUsername(String username, UUID id) {
+		List<User> users = (List<User>) this.userRespository.findByUsername(username);
+		if (users.isEmpty()) {
+			return false;
+		} else {
+			User user = users.get(0);
+			if (id != null) {
+				if (user.getId().equals(id)) {
+					return false; 
+				}
+			}
+			return true;
+		}				
+	}
+
+	
+	/**
+	 * Check duplicated username
+	 * 
+	 * @param email Emial to check
+	 * @param id User id
+	 * @return true o false
+	 */
+	private boolean isDuplicatedEmail(String email, UUID id) {
 		List<User> users = (List<User>) this.userRespository.findByEmail(email);
 		if (users.isEmpty()) {
 			return false;
@@ -126,6 +159,7 @@ public class UserServiceImpl implements UserService {
 		}				
 	}
 
+	
 	/**
 	 * Update user
 	 * @param user
